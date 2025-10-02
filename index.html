@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería 3D - Hora de Aventura</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #222;
+      color: white;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+    }
+
+    /* Contenedor general */
+    .container {
+      display: flex;
+      width: 100%;
+    }
+
+    /* Panel izquierdo con miniaturas */
+    .sidebar {
+      width: 200px;
+      background-color: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      padding: 15px 10px;
+      gap: 20px;
+      border-right: 2px solid #333;
+    }
+
+    .thumb {
+      width: 160px;
+      height: 150px;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.3s;
+      overflow: hidden;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #1a1a1a, #333);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .thumb:hover {
+      transform: scale(1.07);
+      border-color: yellow;
+      box-shadow: 0 0 10px yellow;
+    }
+
+    .thumb model-viewer {
+      width: 100%;
+      height: 110px;
+    }
+
+    .thumb span {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffd700;
+      margin-top: 5px;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    /* Panel derecho */
+    .viewer {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      background: #181818;
+      padding: 20px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #ffd700;
+      text-shadow: 2px 2px 4px black;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      font-style: italic;
+      color: #ddd;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .viewer model-viewer {
+      width: 100%;
+      height: 100%;
+      max-width: 900px;
+      max-height: 650px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Panel izquierdo -->
+    <div class="sidebar">
+      <div class="thumb" onclick="changeModel('GLB/BMO.glb')">
+        <model-viewer src="GLB/BMO.glb" camera-controls disable-zoom></model-viewer>
+        <span>BMO</span>
+      </div>
+      <div class="thumb" onclick="changeModel('GLB/Finn.glb')">
+        <model-viewer src="GLB/Finn.glb" camera-controls disable-zoom></model-viewer>
+        <span>Finn</span>
+      </div>
+      <div class="thumb" onclick="changeModel('GLB/JAKE.glb')">
+        <model-viewer src="GLB/JAKE.glb" camera-controls disable-zoom></model-viewer>
+        <span>Jake</span>
+      </div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div class="viewer">
+      <div class="title">HORA DE AVENTURA</div>
+      <div class="subtitle">"Juntos construiremos una gran aventura"</div>
+      <model-viewer id="mainViewer" 
+        src="GLB/BMO.glb" 
+        alt="Vista principal"
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1"
+        environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+        touch-action="pan-y">
+      </model-viewer>
+    </div>
+
+  </div>
+
+  <script>
+    function changeModel(modelPath) {
+      document.getElementById("mainViewer").setAttribute("src", modelPath);
+    }
+  </script>
+</body>
+</html>
